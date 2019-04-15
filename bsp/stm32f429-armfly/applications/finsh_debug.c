@@ -54,9 +54,21 @@ uint32_t readDM9000ID(){
 	return data;
 }
 
+#define LED_ON(n) (*((volatile uint32_t *) 0x64001000)) = 0xffff & ~(1<<(n+8));  for(int j=0;j<10;j++){;}  //必须等待一段时间使得锁存器电平改变才能点亮LED
+#define LED_OFF(n) (*((volatile uint32_t *) 0x64001000)) = 0xffff | (1<<(n+8));  for(int j=0;j<10;j++){;}
+void led(int num){
+	for(int i=0;i<5;i++){
+		LED_ON(num);
+		rt_thread_delay(1000);
+		LED_OFF(num);
+		rt_thread_delay(1000);
+	}
+}
+
 #ifdef RT_USING_FINSH
 #include <finsh.h>
 FINSH_FUNCTION_EXPORT_ALIAS(readDM9000Reg, readDM, readDM(reg));
 FINSH_FUNCTION_EXPORT_ALIAS(writeDM9000Reg, writeDM, writeDM(reg, value));
 FINSH_FUNCTION_EXPORT_ALIAS(readDM9000ID, __cmd_readDMID,);
+FINSH_FUNCTION_EXPORT_ALIAS(led, led,);
 #endif

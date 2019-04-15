@@ -73,7 +73,7 @@ void udp_demo_test(void)
 					err = netconn_send(udpconn,sentbuf);  	//将netbuf中的数据发送出去
 					if(err != ERR_OK)
 					{
-						rt_kprintf("发送失败\r\n");
+						rt_kprintf("发送失败:%d\r\n", err);
 					}
 					//udp_flag &= ~LWIP_SEND_DATA;	//清除数据发送标志
 					netbuf_delete(sentbuf);      	//删除buf

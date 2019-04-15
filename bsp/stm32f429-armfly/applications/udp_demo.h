@@ -1,6 +1,7 @@
 #ifndef __UDP_DEMO_H
 #define __UDP_DEMO_H
 #include <rtthread.h>
+#include "delay.h"
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32F4&F7开发板
@@ -17,9 +18,9 @@
 //无
 ////////////////////////////////////////////////////////////////////////////////// 	   
  
-typedef rt_uint8_t u8;
-typedef rt_uint16_t u16;
-typedef rt_uint32_t u32;
+//typedef rt_uint8_t u8;
+//typedef rt_uint16_t u16;
+//typedef rt_uint32_t u32;
  
 #define UDP_DEMO_RX_BUFSIZE		2000	//定义udp最大接收数据长度
 #define UDP_DEMO_PORT			8089	//定义udp连接的本地端口号

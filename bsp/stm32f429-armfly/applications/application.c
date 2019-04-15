@@ -16,6 +16,7 @@
 #include <board.h>
 #include <rtthread.h>
 #include "udp_demo.h"
+#include "delay.h"
 //#include "lcd.h"
 //#include "lcd12864.h"
 
@@ -29,7 +30,7 @@
 #include <dfs_posix.h>
 #endif
 
-#define DM_ADD (*((volatile unsigned int *) 0x64001000))
+#define DM_ADD (*((volatile uint32_t *) 0x64001000))
 
 struct rt_ringbuffer *buffer;
 
@@ -72,14 +73,21 @@ void rt_init_thread_entry(void* parameter)
 	buffer = rt_ringbuffer_create(50);
 	
 
-
+	int i;
 	while(1){
-		DM_ADD = 0xffff;
+		//DM_ADD = 0xffff;
+		//delay_ms(20);
 		//rt_kprintf("ON\n");
-		rt_thread_delay(1000);
-		DM_ADD = 0xf0ff;
+		//rt_thread_delay(1000);
+		//DM_ADD = 0xf0ff;
+		//delay_ms(20);
 		//rt_kprintf("OFF\n");
 		rt_thread_delay(1000);
+//		DM_ADD = 0xffff;
+//		for(i=0;i<10;i++);
+		rt_thread_delay(1000);
+//		DM_ADD = 0xfeff;
+//		for(i=0;i<10;i++);
 	}
     
 }
@@ -124,7 +132,7 @@ void rt_ringbuffer_consume_entry(void* parameter)
 }
 
 void rt_udpserver_entry(void* parameter){
-	rt_thread_delay(5000);
+	rt_thread_delay(12000);
 	udp_demo_test();
 }
 
